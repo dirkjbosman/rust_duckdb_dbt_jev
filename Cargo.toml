@@ -1,0 +1,15 @@
+[package]
+name = "duckdb-jev-rs"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "jev"
+crate-type = ["cdylib"]
+
+[dependencies]
+quack-rs = "0.13"
+libduckdb-sys = { version = ">=1.4.4, <2", features = ["loadable-extension"] }
+reqwest = { version = "0.12", features = ["blocking", "json"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
