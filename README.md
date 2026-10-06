@@ -1,4 +1,4 @@
-# duckdb-jev-rs
+# Jev Rust Extension for Duck-DB & dbt
 
 A DuckDB loadable extension written in Rust that classifies open-ended survey feedback using [Ollama's JEV-style decision models](https://ollama.com/blog/ollama-now-supports-jev-style-decision-models) — entirely free and local, no API key required.
 
