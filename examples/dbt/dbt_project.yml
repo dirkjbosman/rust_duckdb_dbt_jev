@@ -10,7 +10,7 @@ clean-targets: ["target", "dbt_packages"]
 # Load the JEV extension before any model runs.
 # Adjust the path if your working directory differs.
 on-run-start:
-  - "LOAD '{{ env_var('JEV_EXTENSION_PATH', '../jev.duckdb_extension') }}';"
+  - "LOAD '{{ env_var('JEV_EXTENSION_PATH', '../../jev.duckdb_extension') }}';"
 
 models:
   kleinanzeigen:

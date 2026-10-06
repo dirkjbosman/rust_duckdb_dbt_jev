@@ -4,5 +4,5 @@ kleinanzeigen:
     dev:
       type: duckdb
       path: dev.duckdb
-      settings:
+      config_options:
         allow_unsigned_extensions: true

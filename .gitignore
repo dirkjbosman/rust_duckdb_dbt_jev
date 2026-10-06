@@ -37,8 +37,16 @@ build/
 .python-version
 
 # dbt
-dbt_example/target/
-dbt_example/logs/
-dbt_example/dev.duckdb
-dbt_example/dev.duckdb.wal
+examples/dbt/target/
+examples/dbt/logs/
+examples/dbt/dev.duckdb
+examples/dbt/dev.duckdb.wal
+examples/dbt/.venv/
 dbt_packages/
+
+# dbt auto-generated (telemetry ID, never commit)
+.user.yml
+
+# uv
+.uv/
+uv.lock
