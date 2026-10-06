@@ -22,3 +22,23 @@ rustc-ice-*.txt
 # Environment variable files
 .env
 .env.*
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+.python-version
+
+# dbt
+dbt_example/target/
+dbt_example/logs/
+dbt_example/dev.duckdb
+dbt_example/dev.duckdb.wal
+dbt_packages/

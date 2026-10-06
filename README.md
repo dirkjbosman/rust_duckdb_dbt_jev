@@ -187,12 +187,62 @@ If Ollama is not reachable, the extension falls back to keyword matching so quer
 
 ---
 
+## dbt integration
+
+If you use [dbt](https://docs.getdbt.com) with the [`dbt-duckdb`](https://github.com/duckdb/dbt-duckdb) adapter, a ready-to-run project is in `dbt_example/`.
+
+### Install
+
+```bash
+pip install dbt-duckdb
+```
+
+### Run
+
+```bash
+cd dbt_example
+
+# Use the bundled profiles.yml instead of ~/.dbt/profiles.yml
+dbt seed --profiles-dir .
+dbt run --profiles-dir .
+```
+
+Set `JEV_EXTENSION_PATH` if your extension file is not at `../jev.duckdb_extension`:
+
+```bash
+export JEV_EXTENSION_PATH=/absolute/path/to/jev.duckdb_extension
+dbt run --profiles-dir .
+```
+
+### Models
+
+| Model | Equivalent plain SQL |
+|---|---|
+| `staging/stg_survey_feedback` | clean types from raw seed |
+| `marts/survey_classified` | `jev_classify(comment)` per row + correctness flag |
+| `marts/survey_category_summary` | `GROUP BY` predicted category with counts + avg rating |
+| `marts/survey_accuracy` | overall accuracy % vs ground-truth labels |
+
+The models run in dependency order automatically (`stg → classified → summary/accuracy`).
+
+---
+
 ## Project structure
 
 ```
-src/lib.rs       — extension source (Rust)
-Cargo.toml       — dependencies
-Makefile         — build + package shortcut
-demo.sql         — example DuckDB queries
+src/lib.rs                          — extension source (Rust)
+Cargo.toml                          — dependencies
+Makefile                            — build + package shortcut
+demo.sql                            — plain SQL example queries
 kleinanzeigen_surveys_csv_survey_batch_013.csv  — sample data (synthetic)
+dbt_example/
+  profiles.yml                      — DuckDB connection config
+  dbt_project.yml                   — project config + extension load hook
+  seeds/kleinanzeigen_surveys.csv   — survey data for dbt seed
+  models/staging/
+    stg_survey_feedback.sql
+  models/marts/
+    survey_classified.sql
+    survey_category_summary.sql
+    survey_accuracy.sql
 ```
